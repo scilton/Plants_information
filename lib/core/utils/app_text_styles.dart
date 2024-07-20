@@ -11,6 +11,10 @@ class AppTextStyles {
   static TextStyle title18BlackTextStyle = const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: Colors.blue);
+      color: Colors.black);
+  static TextStyle title30GreenTextStyle = const TextStyle(
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+      color: Colors.green);
 
 }
