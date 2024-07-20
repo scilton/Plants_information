@@ -4,5 +4,5 @@ class EndPoints {
 
   /// API Key
   static const String allPlants = "/api/v1/plants";
-  static const String zonePlants = "/api/v1/distributions/";
+  static String zonePlants(String zoneId) => "/api/v1/distributions/$zoneId/plants";
 }
