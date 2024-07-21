@@ -1,20 +1,20 @@
 class PlantsModel {
-  List<Data>? data;
+  List<Plant>? plants;
   Links? links;
 
   PlantsModel({
-    this.data,
+    this.plants,
     this.links,
   });
 
   PlantsModel.fromJson(Map<String, dynamic> json) {
-    data = (json['data'] as List?)?.map((dynamic e) => Data.fromJson(e as Map<String,dynamic>)).toList();
+    plants = (json['data'] as List?)?.map((dynamic e) => Plant.fromJson(e as Map<String,dynamic>)).toList();
     links = (json['links'] as Map<String,dynamic>?) != null ? Links.fromJson(json['links'] as Map<String,dynamic>) : null;
   }
 
 }
 
-class Data {
+class Plant {
   int? id;
   String? commonName;
   String? scientificName;
@@ -27,7 +27,7 @@ class Data {
   String? family;
   Links? links;
 
-  Data({
+  Plant({
     this.id,
     this.commonName,
     this.scientificName,
@@ -41,7 +41,7 @@ class Data {
     this.links,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Plant.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     commonName = json['common_name']??'NA';
     scientificName = json['scientific_name']??"NA";
