@@ -17,12 +17,6 @@ final class GetPlantError extends HomeState {
   GetPlantError(this.error);
 }
 
-final class GetZonePlantLoading extends HomeState {}
+final class LoadMoreLoading extends HomeState {}
 
-final class GetZonePlantSuccess extends HomeState {}
-
-final class GetZonePlantError extends HomeState {
-  final String error;
-
-  GetZonePlantError(this.error);
-}
+final class LoadMoreSuccess extends HomeState {}

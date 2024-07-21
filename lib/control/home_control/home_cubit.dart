@@ -27,22 +27,30 @@ class HomeCubit extends Cubit<HomeState> {
   ];
 
   changeFilter(int index) {
-    filterSelectedIndex = index;
-    emit(HomeFilterChanged());
+    if (filterSelectedIndex != index) {
+      page = 1;
+      plants.clear();
+      filterSelectedIndex = index;
+      if (index == 0) {
+        getAllPlants();
+      } else {
+        getZonePlants();
+      }
+      emit(HomeFilterChanged());
+    }
   }
 
   /// Get all plants
-
-  void getAllPlants() {
+  Future<void> getAllPlants() async {
     emit(GetPlantLoading());
     // get data from api
     try {
-      DioHelper.get(url: EndPoints.allPlants, query: {
+    await  DioHelper.get(url: EndPoints.allPlants, query: {
         'token': AppConstants.accessToken,
         'page': page,
       }).then((value) {
         plantsModel = PlantsModel.fromJson(value.data);
-        plants = plantsModel!.plants!;
+        plants.addAll(plantsModel!.plants!);
         emit(GetPlantSuccess());
       });
     } on DioException catch (e) {
@@ -51,23 +59,45 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void getZonePlants() {
-    emit(GetZonePlantLoading());
-    // get data from api
+  /// Get zone plants
+  Future<void> getZonePlants() async {
+    emit(GetPlantLoading());
     try {
-      DioHelper.get(
+    await  DioHelper.get(
           url: EndPoints.zonePlants(filterList[filterSelectedIndex]['id']!),
           query: {
             'token': AppConstants.accessToken,
             'page': page,
           }).then((value) {
         plantsModel = PlantsModel.fromJson(value.data);
-        plants = plantsModel!.plants!;
-        emit(GetZonePlantSuccess());
+        plants.addAll(plantsModel!.plants!);
+        emit(GetPlantSuccess());
       });
     } on DioException catch (e) {
       debugPrint(e.toString());
-      emit(GetZonePlantError(e.toString()));
+      emit(GetPlantError(e.toString()));
+    }
+  }
+
+  /// Load more plants
+  bool loadMore = true;
+
+  Future<void> loadMorePlants() async {
+    loadMore = true;
+    page++;
+    try {
+      if (filterSelectedIndex == 0) {
+        await getAllPlants();
+        emit(LoadMoreSuccess());
+      } else {
+        await getZonePlants().then((value) {
+          emit(LoadMoreSuccess());
+        });
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    } finally {
+      loadMore = false;
     }
   }
 }

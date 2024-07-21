@@ -50,7 +50,7 @@ class Plant {
     author = json['author']??"NA";
     status = json['status']??"NA";
     familyCommonName = json['family_common_name']??"NA";
-    imageUrl = json['image_url'];
+    imageUrl = json['image_url']??'';
     family = json['family'];
     links = (json['links'] as Map<String,dynamic>?) != null ? Links.fromJson(json['links'] as Map<String,dynamic>) : null;
   }
