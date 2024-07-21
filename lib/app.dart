@@ -11,25 +11,22 @@ import 'core/utils/app_strings.dart';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // root of application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.black,
         systemNavigationBarDividerColor: Colors.black));
-    return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: ScreenUtilInit(
-        designSize: const Size(360, 760),
-        builder: (_, child) =>
-            MaterialApp(
-              title: AppStrings.homeTitle,
-              debugShowCheckedModeBanner: false,
-              theme: appTheme(),
-              onGenerateRoute: AppRoutes.onGenerateRoute,
-            ),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(360, 760),
+      builder: (_, child) =>
+          MaterialApp(
+            title: AppStrings.homeTitle,
+            debugShowCheckedModeBanner: false,
+            theme: appTheme(),
+            onGenerateRoute: AppRoutes.onGenerateRoute,
+          ),
     );
   }
 }
