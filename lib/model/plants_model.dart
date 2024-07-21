@@ -44,14 +44,14 @@ class Plant {
   Plant.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     commonName = json['common_name']??'NA';
-    scientificName = json['scientific_name']??"NA";
+    scientificName = json['scientific_name'];
     year = json['year']?? -1;
     bibliography = json['bibliography']??"NA";
     author = json['author']??"NA";
     status = json['status']??"NA";
     familyCommonName = json['family_common_name']??"NA";
     imageUrl = json['image_url']??'';
-    family = json['family'];
+    family = json['family']??"NA";
     links = (json['links'] as Map<String,dynamic>?) != null ? Links.fromJson(json['links'] as Map<String,dynamic>) : null;
   }
 
