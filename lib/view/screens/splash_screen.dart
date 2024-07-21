@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:plants_informations/config/routes/app_routes.dart';
 import 'package:plants_informations/core/utils/app_strings.dart';
 import 'package:plants_informations/core/utils/app_text_styles.dart';
+import 'package:plants_informations/core/utils/nav.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   goToHome() {
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/home');
+      navigateNamedFinish(context,Routes.home);
     });
   }
 
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset('assets/image/plant.png'),
               Text(
-                AppStrings.splashAppName,
+                AppStrings.appTitle,
                 style: AppTextStyles.title30GreenTextStyle,
               )
             ],
