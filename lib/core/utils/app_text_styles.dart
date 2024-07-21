@@ -13,6 +13,10 @@ class AppTextStyles {
       fontSize: 18.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black);
+  static TextStyle text14BlackTextStyle =  TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      color: Colors.black);
   static TextStyle title30GreenTextStyle = TextStyle(
       fontSize: 30.sp,
       fontWeight: FontWeight.bold,
