@@ -20,7 +20,7 @@ class PlantInformationImage extends StatelessWidget {
       child: CachedNetworkImage(
         fit: BoxFit.fill,
         width: .95.sw,
-        height: .5.sh,
+        height: .48.sh,
         imageUrl: imageUrl,
         placeholder: (context, url) => const Loader(),
         errorWidget: (context, url, error) => Image.asset(

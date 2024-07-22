@@ -19,7 +19,7 @@ class PlantImage extends StatelessWidget {
         ),
       ),
       child: CachedNetworkImage(
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
         width: .35.sw,
         height: .23.sh,
         imageUrl: controller
