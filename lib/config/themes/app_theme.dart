@@ -8,7 +8,7 @@ ThemeData appTheme() {
   return ThemeData(
       primaryColor: AppColors.defaultColor,
       canvasColor: Colors.transparent,
-      primarySwatch: Colors.blueGrey,
+      primarySwatch: Colors.blue,
       scaffoldBackgroundColor: AppColors.backGroundColor,
       brightness: Brightness.light,
       appBarTheme: AppBarTheme(
