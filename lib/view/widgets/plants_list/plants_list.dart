@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plants_informations/config/routes/app_routes.dart';
 import 'package:plants_informations/core/utils/app_colors.dart';
+import 'package:plants_informations/core/utils/nav.dart';
 import 'package:plants_informations/view/widgets/loader.dart';
 import 'package:plants_informations/view/widgets/plants_list/plant_details.dart';
 import 'package:plants_informations/view/widgets/plants_list/plant_image.dart';
@@ -45,39 +47,45 @@ class _PlantsListState extends State<PlantsList> {
             controller: _scrollController,
             itemBuilder: (context, index) {
               if (index < controller.plants.length) {
-                return Column(
-                  children: [
-                    Card(
-                      elevation: 10,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: index % 2 != 0
-                              ? AppColors.listItemColor1
-                              : AppColors.listItemColor2,
-                          borderRadius: const BorderRadius.all(
+                return InkWell(
+                  onTap: () {
+                    navigateNamedTo(context, Routes.plantInformation,
+                        arguments: controller.plants[index]);
+                  },
+                  child: Column(
+                    children: [
+                      Card(
+                        elevation: 10,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(20),
                           ),
                         ),
-                        child: Row(children: [
-                          PlantImage(index: index),
-                          SizedBox(
-                            width: 20.w,
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: index % 2 != 0
+                                ? AppColors.listItemColor1
+                                : AppColors.listItemColor2,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(20),
+                            ),
                           ),
-                          PlantDetails(index: index),
-                        ]),
+                          child: Row(children: [
+                            PlantImage(index: index),
+                            SizedBox(
+                              width: 20.w,
+                            ),
+                            PlantDetails(index: index),
+                          ]),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                    ],
+                  ),
                 );
               } else {
                 return const Loader();
