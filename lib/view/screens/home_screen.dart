@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           HomeCubit controller = context.read<HomeCubit>();
           return Scaffold(
-            appBar: customAppBar(context, title: AppStrings.appTitle),
+            appBar: customAppBar(context, title: AppStrings.homeAppbarTitle),
             body: StreamBuilder(
                 stream: controller.connection.onStatusChange,
                 builder: (context, snapshot) {

@@ -45,7 +45,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(GetPlantLoading());
     // get data from api
     try {
-    await  DioHelper.get(url: EndPoints.allPlants, query: {
+      await DioHelper.get(url: EndPoints.allPlants, query: {
         'token': AppConstants.accessToken,
         'page': page,
       }).then((value) {
@@ -63,7 +63,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getZonePlants() async {
     emit(GetPlantLoading());
     try {
-    await  DioHelper.get(
+      await DioHelper.get(
           url: EndPoints.zonePlants(filterList[filterSelectedIndex]['id']!),
           query: {
             'token': AppConstants.accessToken,
@@ -83,21 +83,24 @@ class HomeCubit extends Cubit<HomeState> {
   bool loadMore = true;
 
   Future<void> loadMorePlants() async {
-    loadMore = true;
-    page++;
-    try {
-      if (filterSelectedIndex == 0) {
-        await getAllPlants();
-        emit(LoadMoreSuccess());
-      } else {
-        await getZonePlants().then((value) {
+    int lastPage = int.parse(plantsModel!.links!.last!.split('page=')[1]);
+    if (page < lastPage) {
+      loadMore = true;
+      page++;
+      try {
+        if (filterSelectedIndex == 0) {
+          await getAllPlants();
           emit(LoadMoreSuccess());
-        });
+        } else {
+          await getZonePlants().then((value) {
+            emit(LoadMoreSuccess());
+          });
+        }
+      } catch (e) {
+        debugPrint(e.toString());
+      } finally {
+        loadMore = false;
       }
-    } catch (e) {
-      debugPrint(e.toString());
-    } finally {
-      loadMore = false;
     }
   }
 }
