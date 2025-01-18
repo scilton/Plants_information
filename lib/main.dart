@@ -6,7 +6,7 @@ import 'app.dart';
 import 'core/constants/my_bloc_observer.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await DioHelper.init();
   runApp(const MyApp());
