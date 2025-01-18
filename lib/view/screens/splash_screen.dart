@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.all(30),
           child: Stack(
             alignment: Alignment.center,
-            children: [
+            children: <Widget>[
+              const SizedBox(),
               Image.asset('assets/image/plant.png'),
               Text(
                 AppStrings.appTitle,
